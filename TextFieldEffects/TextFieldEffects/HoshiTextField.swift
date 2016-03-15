@@ -70,6 +70,24 @@ import UIKit
         }
     }
     
+    public func showError(errorText: String? = "Required") {
+        let errorLabel = UILabel(frame: CGRect(x: frame.width - 30, y: frame.height/2 - 5, width: 30, height: 10))
+        errorLabel.text = "🚫"
+        addSubview(errorLabel)
+        let placeholderTemp = placeholder
+        placeholderColor = UIColor.redColor()
+        layer.borderColor = UIColor.redColor().CGColor
+        placeholder = errorText
+        UIView.animateWithDuration(2, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+            errorLabel.alpha = 0
+            }) { (Bool) -> Void in
+                errorLabel.removeFromSuperview()
+                self.placeholder = placeholderTemp
+                self.placeholderColor = UIColor.whiteColor()
+                self.layer.borderColor = UIColor.whiteColor().CGColor
+        }
+    }
+    
     private let borderThickness: (active: CGFloat, inactive: CGFloat) = (active: 2, inactive: 0.5)
     private let placeholderInsets = CGPoint(x: 10, y: 6)
     private let textFieldInsets = CGPoint(x: 10, y: 12)
