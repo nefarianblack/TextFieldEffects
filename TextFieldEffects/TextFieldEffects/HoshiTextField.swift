@@ -88,7 +88,7 @@ import UIKit
                 self.placeholder = placeholderTemp
                 self.placeholderColor = UIColor.whiteColor()
                 self.layer.borderColor = UIColor.whiteColor().CGColor
-                isAnimating = false
+                self.isAnimating = false
         }
     }
     
