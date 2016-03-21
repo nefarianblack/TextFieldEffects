@@ -71,6 +71,8 @@ import UIKit
     }
     
     public func showError(errorText: String? = "Required") {
+        if isAnimating { return }
+        
         let errorLabel = UILabel(frame: CGRect(x: frame.width - 30, y: frame.height/2 - 5, width: 30, height: 10))
         errorLabel.text = "🚫"
         addSubview(errorLabel)
@@ -78,6 +80,7 @@ import UIKit
         placeholderColor = UIColor.redColor()
         layer.borderColor = UIColor.redColor().CGColor
         placeholder = errorText
+        isAnimating = true
         UIView.animateWithDuration(2, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
             errorLabel.alpha = 0
             }) { (Bool) -> Void in
@@ -85,6 +88,7 @@ import UIKit
                 self.placeholder = placeholderTemp
                 self.placeholderColor = UIColor.whiteColor()
                 self.layer.borderColor = UIColor.whiteColor().CGColor
+                isAnimating = false
         }
     }
     
@@ -94,6 +98,7 @@ import UIKit
     private let inactiveBorderLayer = CALayer()
     private let activeBorderLayer = CALayer()    
     private var activePlaceholderPoint: CGPoint = CGPointZero
+    private var isAnimating = false
     
     // MARK: - TextFieldsEffects
     
